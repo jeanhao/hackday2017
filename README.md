@@ -16,7 +16,6 @@ USER_NAME_USED = 102
 USERNAME_PASSWORD_NOT_MATCH = 103
 ```
 
-
 ## 发送验证码
 POST /api/user/message
 
@@ -60,6 +59,55 @@ POST /api/user/login
 {
   "status": 0
 }
+
+
+## 列表展示用户植物
+GET /api/plant/list
+
+### 请求参数
+无
+
+### 响应示例
+xxx
+
+## 获取植物详情
+POST /api/plant/detail/`<id>`
+
+### 请求参数
+
+### 响应示例
+
+
+## 用户添加植物
+POST /api/plant/add
+
+### 请求参数
+|参数      |说明     |
+|:-------|:------|
+|pt_type   |植物小类     |
+|age  |年龄     |
+|nickname| 植物名称|
+
+### 响应示例
+xxx
+
+## 用户删除植物
+POST /api/plant/delete
+
+### 请求参数
+|参数      |说明     |
+|:-------|:------|
+|id|植物id|
+
+### 响应示例
+{
+  "status": 0
+}
+
+
+
+
+
 
 
 

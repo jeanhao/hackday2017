@@ -22,7 +22,6 @@ def is_loged(func):
             return func(*args, **kwds)
         else:
             return pack(RetDefine.USER_NOT_LOGIN)
-
     return lazy_func
 
 # 动态注入参数，并检查是否合法

@@ -33,6 +33,7 @@ def register(data):
     elif data['verify_code'] != session['verify_code']:
         return pack(RetDefine.VERIFY_CODE_ERROR)
     data.pop('verify_code')
+    session['user'] = data
     return UserService().register(data)
 
 @user_view.route("login", methods=POST)

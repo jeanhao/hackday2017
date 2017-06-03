@@ -1,41 +1,34 @@
 # coding=UTF-8
 from flask import Blueprint
 
-from app.views.BaseView import DEFAULT_TEMPLATE_FOLDER, inject_params
-from app.utils.CommonUtils import pack, gen_ramdon_string, gen_ramdon_num
-from Configs import POST
-from app.service.UserService import UserService
-from app.utils import PhoneMessager
-from flask.globals import session
-from app.utils.RetDefine import RetDefine
+from app.views.BaseView import DEFAULT_TEMPLATE_FOLDER, inject_params, is_loged
+from Configs import POST, GET
+from app.service.PlantService import PlantService
 
-user_view = Blueprint('user', __name__, url_prefix="/" , template_folder=DEFAULT_TEMPLATE_FOLDER)
+plant_view = Blueprint('plant', __name__, url_prefix="/" , template_folder=DEFAULT_TEMPLATE_FOLDER)
 
 
-@user_view.route("message", methods=POST)
-@inject_params(['phone_num'])
-def send_message(data):
-    verify_code = str(gen_ramdon_num())
-    session['verify_code'] = verify_code
-    res = PhoneMessager.send_message(data['phone_num'], verify_code)
-#     res = PhoneMessager.send_message(data['phone_num'], verify_code, data['nickname'])
-    if res:
-        return pack()
-    else:
-        return pack(RetDefine.SEND_ERROR)
+@plant_view.route("list", methods=GET)
+@is_loged
+def list_plant():
+    return PlantService().list_plant()
 
-@user_view.route("register", methods=POST)
-@inject_params(['phone_num', 'password', 'nickname', 'verify_code'])
-def register(data):
-    if 'verify_code' not in session:
-        return pack(RetDefine.VERIFY_CODE_NOT_EXIST)
-    elif data['verify_code'] != session['verify_code']:
-        return pack(RetDefine.VERIFY_CODE_ERROR)
-    data.pop('verify_code')
-    return UserService().register(data)
+@plant_view.route("add", methods=POST)
+@is_loged
+@inject_params(['pt_type', 'nickname', 'age'])
+def add_plant(data):
+    return PlantService().add_plant(data)
 
-@user_view.route("login", methods=POST)
-@inject_params(['phone_num', 'password'])
-def login(data):
-    return UserService().login(data)
+@plant_view.route("del", methods=POST)
+@is_loged
+@inject_params(['id'])
+def del_plant(data):
+    return PlantService().del_plant(data)
+
+@plant_view.route("detail/<_id>", methods=POST)
+@is_loged
+def detail_plant(_id):
+    return PlantService().detail_plant(_id)
+
+
 

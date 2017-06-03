@@ -6,7 +6,6 @@ from Configs import dbOper
 from app.dbManager import DBTool  # @UnusedWildImport
 from app.dbManager.DBModelFactory import DBModelFactory
 from app.service.BaseService import BaseService
-from app.utils import AesCrypt
 from app.utils.CommonUtils import *  # @UnusedWildImport
 from app.utils.Singleton import Singleton
 
@@ -30,8 +29,10 @@ class UserService(BaseService):
             data['password'] = generate_password_hash(data['password'])
             sql = DBTool.insert(self.table, data)
             res = db_model.execute(sql)
-            if not res:
+            if not res.rowcount:
                 return pack(RetDefine.SYS_ERR)
+            data['id'] = res.lastrowid
+
             return pack()
 
     @connectionWrapper(dbOper.READ)
