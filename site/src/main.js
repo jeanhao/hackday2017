@@ -8,8 +8,10 @@ import MuseUI from 'muse-ui'
 import Mobile from '@/scripts/until'
 
 import vFetch from '@/plugins/vFetch'
+import Tip from '@/plugins/Tip/Tip'
 
 import 'muse-ui/dist/muse-ui.css'
+import '@/libs/typo.css'
 
 import App from './App';
 import router from './router';
@@ -21,6 +23,7 @@ mb.setFontSize()
 Vue.config.productionTip = false;
 
 Vue.use(MuseUI)
+Vue.use(Tip)
 Vue.use(vFetch)
 
 /* eslint-disable no-new */
