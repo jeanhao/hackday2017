@@ -12,7 +12,6 @@ from flask.helpers import make_response
 import time
 from app.utils.Singleton import singleton
 from app.service.UserService import UserService
-from app.utils.CommonUtils import timestamp2str, filterMap
 from app.utils.RedisClient import RedisClient
 from app.utils.mp.MpManager import MpManager
 
@@ -40,28 +39,14 @@ class MsgDealer(object):
             return ""
 
     def text(self, data):
-        fromUserName = data['FromUserName']
-
-        # 更新聊天有效时间
-#         self.redisClient.hset(Config.VALID_VISIT_TIME, fromUserName, int(time.time()) + Config.ONE_DAY)
-
-        # 检测用户状态
-        status = self.userService.checkUserStatus(fromUserName)
-        # 判断状态
-        if status == -1:  # 永久被封处理
-            return self.respText(data['FromUserName'], data['ToUserName'], Config.UNABLE_PERMANENT_TEXT)
-        elif status == 1:  # 正常状态
-            return self.dealContent(data)
-        else:  # 暂时被封
-            return self.respText(data['FromUserName'], data['ToUserName'], \
-                                  Config.UNABLE_TEMPORARY_TEXT % timestamp2str(status))
+        return self.dealContent(data)
 
     def dealContent(self, data):
         content = data['Content']
-        for keyword in Config.CONTENT_KEYWORDS:
-            if keyword == content:
-                content = Config.CONTENT_KEYWORDS[keyword]
-                break
+#         for keyword in Config.CONTENT_KEYWORDS:
+#             if keyword == content:
+#                 content = Config.CONTENT_KEYWORDS[keyword]
+#                 break
         return self.respText(data['FromUserName'], data['ToUserName'], content)
 
     def event(self, data):
@@ -70,7 +55,7 @@ class MsgDealer(object):
             GFLogger.debug("subscribe event happend")
             userinfo = self.mpManager.getDetailUser(data['FromUserName'])
             self.userService.addUser(filterMap(userinfo, ['openid', 'nickname']))
-            return self.respText(data['FromUserName'], data['ToUserName'], Config.NEW_FRIEND_TEXT)
+            return self.respText(data['FromUserName'], data['ToUserName'], "欢迎关注公众号")
         elif event == "unsubscribe":  # 用户取消关注微信号
             GFLogger.debug("unsubscribe event happend")
             self.userService.dropUser(data['FromUserName'])

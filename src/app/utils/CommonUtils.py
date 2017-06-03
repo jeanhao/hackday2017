@@ -27,6 +27,9 @@ def unpack(text):
             logger.error(traceback.format_exc())
     return None
 
+def filterMap(data, keys):
+    return {key:data[key] for key in keys if key in data}
+
 def send_req(url, data=None):
         if data:
             data = urllib.urlencode(data)
