@@ -14,6 +14,7 @@ from app.utils.Singleton import singleton
 from app.service.UserService import UserService
 from app.utils.RedisClient import RedisClient
 from app.utils.mp.MpManager import MpManager
+from app.utils.CommonUtils import filterMap
 
 @singleton
 class MsgDealer(object):

@@ -45,3 +45,31 @@ def db_config_maker(name=DEFAULT_DB_NAME, rate=DEFAULT_DB_RATE,
 dbConfigs.append(db_config_maker())
 
 ######### DBConfig end  ##########
+
+
+# redis config
+REDIS_PORT1 = 6379
+#         DEFAULT_HOST = 'localhost'
+DEFAULT_HOST = 'redis'
+#         DEFAULT_HOST = 'r-m5ef8971af1a9f54.redis.rds.aliyuncs.com'
+#         REDIS_PASSWORD = "Qwe12345"
+
+
+redis_configs = {
+'default':{'host':DEFAULT_HOST, 'port' : REDIS_PORT1},
+}
+MP_TOKEN = 'mp_token'
+MP_TOKEN_LOCK = 'mp_token_lock'
+
+AUTH_BASE_URL = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx690cda5c2ea251b2&redirect_uri=http%3A%2F%2Fbbm.hustonline.net%2Flogin&response_type=code&scope=snsapi_userinfo&state=public/"
+# hustbbm
+APPID = "wxd0b09445bfc46d53"
+APPSECRET = "212c139737fbe2602f0cbe766b96b161"
+ACCESS_TOKEN_URL = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=" + APPID + "&secret=" + APPSECRET
+USER_LIST_URL = "https://api.weixin.qq.com/cgi-bin/user/get?access_token=%s"
+USER_DETAIL_URL = "https://api.weixin.qq.com/cgi-bin/user/info?access_token=%s&openid=%s&lang=zh_CN"
+TEMPLATE_SEND_URL = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=%s"
+SEND_MSG_URL = "https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token=%s"
+
+WEB_ACCESS_TOKEN_URL = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + APPID + "&secret=" + APPSECRET + "&code=%s&grant_type=authorization_code"
+USER_BASE_INFO_URL = "https://api.weixin.qq.com/sns/userinfo?access_token=%s&openid=%s&lang=zh_CN"

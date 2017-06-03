@@ -2,18 +2,7 @@
 import redis, threading
 from app.utils.Singleton import Singleton
 from app.utils.HashRing import HashRing
-
-# redis config
-REDIS_PORT1 = 6379
-#         DEFAULT_HOST = 'localhost'
-DEFAULT_HOST = 'redis'
-#         DEFAULT_HOST = 'r-m5ef8971af1a9f54.redis.rds.aliyuncs.com'
-#         REDIS_PASSWORD = "Qwe12345"
-
-
-redis_configs = {
-'default':{'host':DEFAULT_HOST, 'port' : REDIS_PORT1},
-}
+from Configs import redis_configs
 
 class RedisClient():
 

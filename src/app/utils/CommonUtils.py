@@ -51,6 +51,13 @@ def get_now_time(offset=0, detail=False):
     fmt = fmtdl if detail else fmtsp
     return  now.strftime(fmt)
 
+
+def send_json(url, data):
+    headers = {'Content-Type': 'application/json'}
+    request = urllib2.Request(url=url, headers=headers, data=json.dumps(data, ensure_ascii=False))
+    res = urllib2.urlopen(request)
+    return res.read()
+
 def xml2dict(text):
     root = ET.fromstring(text)
     for each in root.getiterator("xml"):
