@@ -53,11 +53,11 @@ GET /api/task/problem/list
   "status": 0,
   "data": [
     {
-      "tag_name": "拖延症",
+      "content": "拖延症",
       "id": 24
     },
     {
-      "tag_name": "邋遢",
+      "content": "邋遢",
       "id": 25
     },
     ……
@@ -65,6 +65,33 @@ GET /api/task/problem/list
 }
 ```
 
+## 回答问题，并获取答案
+POST /api/task/problem/answer
+
+### 请求参数
+`{problems:[数组]} `,有问题的问题
+
+### 响应示例
+```python
+{
+  "status": 0,
+  "data": [
+    {
+      "content": "答案1",
+      "id": 24，
+      "problem_id":32,
+      "choice":1（0，1，2对应三个难度）
+    },
+    {
+      "content": "邋遢",
+      "id": 25，
+      "problem_id":32,
+      "choice":1（0，1，2对应三个难度）
+    },
+    ……
+  ]
+}
+```
 
 ## 发送验证码
 POST /api/user/message

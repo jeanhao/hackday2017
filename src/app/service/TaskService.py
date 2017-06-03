@@ -47,7 +47,7 @@ class TaskService(BaseService):
             sql = DBTool.insert(self.up_table, data)
             model.execute(sql)
         # 获取新的问题
-        sql = DBTool.select(self.answer_table, ["content", "proble_id", "id"], {("problem_id", "in"):problems})
+        sql = DBTool.select(self.answer_table, where={("problem_id", "in"):problems})
         res = model.GetList(sql)
         return pack(data=res)
 
