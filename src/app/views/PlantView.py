@@ -25,7 +25,7 @@ def add_plant(data):
 def del_plant(data):
     return PlantService().del_plant(data)
 
-@plant_view.route("detail/<_id>", methods=POST)
+@plant_view.route("detail/<_id>", methods=GET)
 @is_loged
 def detail_plant(_id):
     return PlantService().detail_plant(_id)

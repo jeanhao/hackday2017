@@ -5,6 +5,7 @@ import time, traceback
 
 from app.utils.MyLogger import MyLoggerFactory
 from app.utils.RetDefine import RetDefine
+from datetime import datetime
 
 
 TIME_FORMMAT = '%Y-%m-%d %H:%M:%S'
@@ -42,3 +43,5 @@ def gen_ramdon_num(length=6):
 def get_now_date():
     return str(int((time.time() * 1000)))
 
+def get_now_time():
+    return datetime.now().strftime(TIME_FORMMAT)

@@ -26,9 +26,11 @@ POST /api/user/message
 ~~|nickname|昵称，发送短信的称呼|~~
 
 ### 响应示例
+```python
 {
   "status": 0
 }
+```
 
 ## 用户注册
 POST /api/user/register
@@ -42,9 +44,11 @@ POST /api/user/register
 |verify_code|验证码|
 
 ### 响应示例
+```python
 {
   "status": 0
 }
+```
 
 ## 用户登陆
 POST /api/user/login
@@ -56,9 +60,11 @@ POST /api/user/login
 |password  |密码     |
 
 ### 响应示例
+```python
 {
   "status": 0
 }
+```
 
 
 ## 列表展示用户植物
@@ -68,7 +74,23 @@ GET /api/plant/list
 无
 
 ### 响应示例
-xxx
+```python
+{
+  "status": 0,
+  "data": [
+    {
+      "nickname": "tree",
+      "id": 2
+    },
+    {
+      "nickname": "tree",
+      "id": 3
+    },
+    ……
+  ]
+}
+```
+>如果用户数据为空，data也会不存在
 
 ## 获取植物详情
 POST /api/plant/detail/`<id>`
@@ -76,7 +98,11 @@ POST /api/plant/detail/`<id>`
 ### 请求参数
 
 ### 响应示例
-
+```python
+{
+  "status": 0
+}
+```
 
 ## 用户添加植物
 POST /api/plant/add
@@ -89,7 +115,11 @@ POST /api/plant/add
 |nickname| 植物名称|
 
 ### 响应示例
-xxx
+```python
+{
+  "status": 0
+}
+```
 
 ## 用户删除植物
 POST /api/plant/delete
@@ -100,10 +130,19 @@ POST /api/plant/delete
 |id|植物id|
 
 ### 响应示例
+```python
 {
-  "status": 0
+  "status": 0,
+  "data": {
+    "user_id": 4,
+    "pt_type": "type1",
+    "age": "10",
+    "create_date": "2017-06-03 19:10:07",
+    "nickname": "tree",
+    "id": 2
+  }
 }
-
+```
 
 
 

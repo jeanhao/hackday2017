@@ -29,7 +29,8 @@ def inject_params(params, can_empty=False):
     def real_decorator(func):
         @wraps(func)
         def lazy_func(*args, **kargs):
-            req_data = request.get_json()
+            req_data = request.get_json() or {}
+            print req_data
             data = {}
             for arg in params:
                 if type(arg) == str:

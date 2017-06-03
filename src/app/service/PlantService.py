@@ -8,6 +8,7 @@ from app.dbManager.DBModelFactory import DBModelFactory
 from app.service.BaseService import BaseService
 from app.utils.CommonUtils import *  # @UnusedWildImport
 from app.utils.Singleton import Singleton
+from app.utils.CommonUtils import get_now_date
 
 
 class PlantService(BaseService):
@@ -19,7 +20,7 @@ class PlantService(BaseService):
         self.table = "tb_plant_record"
 
     @connectionWrapper(dbOper.READ)
-    def list_plant(self, db_model, data):
+    def list_plant(self, db_model):
         # 查询数据库是否已有数据
         sql = DBTool.select(self.table, ['id', 'nickname'], where={'user_id':session['user']['id']})
         res = db_model.GetList(sql)
@@ -28,13 +29,14 @@ class PlantService(BaseService):
     @connectionWrapper(dbOper.WRITE)
     def detail_plant(self, db_model, _id):
         # 查询数据库是否已有数据
-        sql = DBTool.select(self.table, ['id', 'nickname'], where={'id':_id})
+        sql = DBTool.select(self.table, where={'id':_id})
         res = db_model.GetOne(sql)
         return pack(data=res)
 
     @connectionWrapper(dbOper.WRITE)
     def add_plant(self, db_model, data):
-        # 查询数据库是否已有数据
+        data['create_date'] = get_now_time()
+        data['user_id'] = session['user']['id']
         sql = DBTool.insert(self.table, data)
         res = db_model.execute(sql)
         if not res.rowcount:
@@ -44,7 +46,7 @@ class PlantService(BaseService):
 
     @connectionWrapper(dbOper.WRITE)
     def del_plant(self, db_model, data):
-        # 查询数据库是否已有数据
+        data['user_id'] = session['user']['id']
         sql = DBTool.delete(self.table, data)
         res = db_model.execute(sql)
         if not res.rowcount:
