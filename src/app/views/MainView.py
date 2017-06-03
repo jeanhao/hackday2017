@@ -81,10 +81,10 @@ def get_access_token():
         print token_data['errmsg']
         return 'fail user'
     # 已经拉取到用户信息，跳转到原来界面
-    response = set_login(json.dumps({"nickname": user_data['nickname'], 'openid':openid}))
+#     response = set_login(json.dumps({"nickname": user_data['nickname'], 'openid':openid}))
 
     url = "%s%s" % (request.url_root, state)
-    return redirect(url, Response=response)
+    return redirect(url)
 
 
 @main_view.route("get_ip")
