@@ -78,7 +78,7 @@ def get_access_token():
 def test_login():
     res = make_response('ok')
     user = {"openid": 'o-UJCxAoz4qdPzxJL2N-us54JXc0', 'nickname':u'小三', 'images':'test'}
-    session['user':user]
+    session['user'] = user
     return res
 
 
