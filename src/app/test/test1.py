@@ -48,5 +48,5 @@ if __name__ == '__main__':
     print json_req('plant/list')
     print json_req('plant/add', {"pt_type":'type1', "age":10, "nickname":"tree"})
 #     print json_req('plant/del', {"id":1})
-    print json_req('plant/detail/2')
+    print json_req('pl nt/detail/2')
 
