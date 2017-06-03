@@ -17,7 +17,7 @@ USERNAME_PASSWORD_NOT_MATCH = 103
 ```
 
 
-## 获取发布者联系方式
+## 发送验证码
 POST /api/user/message
 
 ### 请求参数
