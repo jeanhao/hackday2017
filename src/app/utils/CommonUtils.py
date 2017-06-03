@@ -2,13 +2,14 @@
 
 import json, random, string, urllib, urllib2
 import time, traceback
-
+import xml.etree.ElementTree as ET
 from app.utils.MyLogger import MyLoggerFactory
 from app.utils.RetDefine import RetDefine
+import datetime
 
 
-TIME_FORMMAT = '%Y-%m-%d %H:%M:%S'
-
+fmtsp = '%Y-%m-%d'
+fmtdl = '%Y-%m-%d %H:%M:%S'
 logger = MyLoggerFactory().getLogger(__name__)
 
 def pack(ret_status=RetDefine.NO_ERR, data=None):
@@ -26,6 +27,9 @@ def unpack(text):
             logger.error(traceback.format_exc())
     return None
 
+def filterMap(data, keys):
+    return {key:data[key] for key in keys if key in data}
+
 def send_req(url, data=None):
         if data:
             data = urllib.urlencode(data)
@@ -42,3 +46,25 @@ def gen_ramdon_num(length=6):
 def get_now_date():
     return str(int((time.time() * 1000)))
 
+def get_now_time(offset=0, detail=False):
+    now = datetime.datetime.now()
+    if offset:
+        days = datetime.timedelta(days=offset)
+        now = now - days
+    fmt = fmtdl if detail else fmtsp
+    return  now.strftime(fmt)
+
+
+def send_json(url, data):
+    headers = {'Content-Type': 'application/json'}
+    request = urllib2.Request(url=url, headers=headers, data=json.dumps(data, ensure_ascii=False))
+    res = urllib2.urlopen(request)
+    return res.read()
+
+def xml2dict(text):
+    root = ET.fromstring(text)
+    for each in root.getiterator("xml"):
+        data = each.attrib
+        for childNode in each.getchildren():
+            data[childNode.tag] = childNode.text
+        return data

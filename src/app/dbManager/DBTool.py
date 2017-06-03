@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-    
+# -*- coding: utf-8 -*-
 
 from mosql import query, mysql, util  # @UnusedImport
 
@@ -17,16 +17,16 @@ def insert(table, data , keys=None):
 
 def multi_insert(table, datas , keys=None):
     if not keys:
-        keys = datas[0].keys
+        keys = datas[0].keys()
     pair = dict(zip(keys, ["%s"] * len(keys)))
     params = [[data[key] for key in keys] for data in datas]
     return query.insert(table, pair), params
 
-    
+
 def update(table, data, where=None, keys=None):
     if keys:
         data = {key:data[key] for key in keys}
-    return query.update(table, where=where, set=data)    
+    return query.update(table, where=where, set=data)
 
 def multiUpdate(table, datas, where=None, keys=None):
     if not keys:
@@ -40,7 +40,7 @@ def join(table, on=None, using=None, _type='left'):
 
 def select(table, columns=None, where=None, joins=None, order=None, group=None, limit=None, offset=None):
     return query.select(table, columns=columns, where=where, joins=joins, order_by=order, group_by=group, limit=limit, offset=offset)
-    
+
 def delete(table, where):
     return query.delete(table, where)
 
@@ -54,7 +54,7 @@ def sqlAnd(where, conmap={}, keys=None):
         else:
             new_dict[key] = where[key]
     return util.build_where(new_dict)
-    
+
 def sqlOr(where, conmap={}, keys=None, andpart=None):
     new_list = []
     if not keys:

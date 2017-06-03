@@ -17,6 +17,15 @@ def send_req(url, data=None):
     ret = opener.open(req)
     return ret.read()
 
+def json_req(url, data=None):
+    url = "%s%s" % (base_url, url)
+    if data:
+        data = json.dumps(data)  # 对数据进行JSON格式化编码
+    headers = {'Content-Type': 'application/json'}
+    req = urllib2.Request(url, headers=headers, data=data)  # 生成页面请求的完整数据
+    response = opener.open(req)  # 发送页面请求
+    return response.read()
+
 def send_json(info, userid=None):
     url = "http://www.tuling123.com/openapi/api"
     APIKEY = "1e4b631f8d274edab438c3bbd8cfe5fc"
@@ -28,14 +37,16 @@ def send_json(info, userid=None):
     response = urllib2.urlopen(req)  # 发送页面请求
     return response.read()
 
-base_url = 'http://127.0.0.1:5000/'
+base_url = 'http://127.0.0.1:5000/api/'
 
 if __name__ == '__main__':
-#     print send_json(u"你爸爸是谁")
-#     data = {'title':'test','detail':'detail12313','money':123,'end_date':'12312432'}
-#     print send_req('task/add', data)
-    print send_req('user/message', {'phone_num':'15629071220', 'nickname':'zenghao'})
-    code = raw_input('input code')
-    print send_req('user/register', {'phone_num':'15629071220', 'nickname':'zenghao', 'verify_code':code, 'password':"123"})
-    print send_req('user/login', {'phone_num':'15629071220', 'password':"123"})
+    phone_num = '15629071220'
+#     print json_req('user/message', {'phone_num':phone_num})
+#     code = raw_input('input code')
+#     print send_req('user/register', {'phone_num':phone_num, 'nickname':'zenghao', 'verify_code':code, 'password':"123"})
+    print json_req('user/login', {'phone_num':'15629071220', 'password':"qwe123"})
+    print json_req('plant/list')
+    print json_req('plant/add', {"pt_type":'type1', "age":10, "nickname":"tree"})
+#     print json_req('plant/del', {"id":1})
+    print json_req('pl nt/detail/2')
 

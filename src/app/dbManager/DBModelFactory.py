@@ -10,6 +10,7 @@ from app.utils.CommonUtils import pack
 from app.utils.MyLogger import GCLogger
 from app.utils.RetDefine import RetDefine
 from app.utils.Singleton import Singleton
+import traceback
 
 
 class DBModelFactory(object):
@@ -104,7 +105,7 @@ class DBModelFactory(object):
                         ret_val = func(obj, self.initModel(db_model_read), self.initModel(db_model), *args, **kargs)
                         db_model.local.conn.commit()
                 except Exception, e:
-                    GCLogger.error(e)
+                    GCLogger.error(traceback.format_exc(e))
                     if oper != dbOper.READ:
                         db_model.local.conn.rollback()
                     return pack(RetDefine.SYS_ERR)
