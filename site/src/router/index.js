@@ -5,6 +5,7 @@ import Login from '@/pages/Login'
 import SaveMe from '@/pages/SaveMe'
 import SetQuestion from '@/pages/SetQuestion'
 import TaskList from '@/pages/TaskList'
+import Slogan from '@/pages/Slogan'
 
 Vue.use(Router)
 
@@ -29,6 +30,11 @@ export default new Router({
       path: '/list',
       name: 'TaskList',
       component: TaskList,
+    },
+    {
+      path: '/slogan',
+      name: 'Slogan',
+      component: Slogan,
     },
   ],
 });
