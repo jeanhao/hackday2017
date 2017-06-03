@@ -23,7 +23,7 @@ free_sign_name = "植物说"
 template_code = "SMS_69970152"
 msg_body = "植物说消息"
 
-def send_message(receiver, name, code):
+def send_message(receiver, code, name="用户"):
     # 设置SMSSignName和SMSTempateCode
     direct_sms_attr = DirectSMSInfo(free_sign_name=free_sign_name, template_code=template_code, single=False)
     # 指定接收短信的手机号并指定发送给该接收人的短信中的参数值（在短信模板中定义的）

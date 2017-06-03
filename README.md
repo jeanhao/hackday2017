@@ -16,14 +16,15 @@ USER_NAME_USED = 102
 USERNAME_PASSWORD_NOT_MATCH = 103
 ```
 
+
 ## 获取发布者联系方式
-POST /user/message
+POST /api/user/message
 
 ### 请求参数
 |参数      |说明                   |
 |:-------|:--------------------|
 |phone_num|手机号|
-|nickname|昵称，发送短信的称呼|
+~~|nickname|昵称，发送短信的称呼|~~
 
 ### 响应示例
 {
@@ -31,7 +32,7 @@ POST /user/message
 }
 
 ## 用户注册
-POST /user/register
+POST /api/user/register
 
 ### 请求参数
 |参数      |说明     |
@@ -47,7 +48,7 @@ POST /user/register
 }
 
 ## 用户登陆
-POST /user/login
+POST /api/user/login
 
 ### 请求参数
 |参数      |说明     |
