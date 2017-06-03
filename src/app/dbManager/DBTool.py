@@ -17,7 +17,7 @@ def insert(table, data , keys=None):
 
 def multi_insert(table, datas , keys=None):
     if not keys:
-        keys = datas[0].keys
+        keys = datas[0].keys()
     pair = dict(zip(keys, ["%s"] * len(keys)))
     params = [[data[key] for key in keys] for data in datas]
     return query.insert(table, pair), params

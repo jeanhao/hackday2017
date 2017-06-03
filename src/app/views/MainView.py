@@ -3,7 +3,7 @@ import hashlib
 import json
 
 from flask import Blueprint
-from flask.globals import request
+from flask.globals import request, session
 from flask.helpers import make_response
 from werkzeug import redirect
 import Configs
@@ -11,6 +11,7 @@ from Configs import POST, METHODS
 from app.utils.CommonUtils import send_req, xml2dict
 from app.views.BaseView import DEFAULT_TEMPLATE_FOLDER, inject_params
 from app.utils.mp.MsgDealer import MsgDealer
+from app.service.UserService import UserService
 
 
 main_view = Blueprint('main_view', __name__, url_prefix="/" , template_folder=DEFAULT_TEMPLATE_FOLDER)
@@ -69,10 +70,32 @@ def get_access_token():
         return 'fail user'
     # 已经拉取到用户信息，跳转到原来界面
 #     response = set_login(json.dumps({"nickname": user_data['nickname'], 'openid':openid}))
-
+    session['user'] = user_data
     url = "%s%s" % (request.url_root, state)
     return redirect(url)
 
+@main_view.route('test_login')
+def test_login():
+    res = make_response('ok')
+    user = {"openid": 'o-UJCxAoz4qdPzxJL2N-us54JXc0', 'nickname':u'小三', 'images':'test'}
+    session['user':user]
+    return res
+
+
+@main_view.route('public/<site>')  # 这里进入访问特定界面
+@main_view.route('public/<site>/<_id>')
+def route(site, _id=None):
+    if site not in ['index', 'list']:  # ['pub', 'help', 'market', 'pubsell', 'buy']
+        return "访问地址出错，请检查"
+    # 检查用户状态
+    if 'user' in session:
+        session['user']
+
+    else:
+        url = Configs.AUTH_BASE_URL + site
+        if id:
+            url = "%s/%s" % (url, id)
+        return redirect(url)
 
 @main_view.route("get_ip")
 def get_ip():
