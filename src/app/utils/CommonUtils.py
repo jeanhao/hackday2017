@@ -40,6 +40,9 @@ def send_req(url, data=None):
 def gen_ramdon_string(length=10):
     return string.join(random.sample(['z', 'y', 'x', 'w', 'v', 'u', 't', 's', 'r', 'q', 'p', 'o', 'n', 'm', 'l', 'k', 'j', 'i', 'h', 'g', 'f', 'e', 'd', 'c', 'b', 'a'], length)).replace(' ', '')
 
+def gen_ramdon_num(length=6):
+    return random.randint(10 ** (length - 1), 10 ** length - 1)
+
 def get_now_date():
     return str(int((time.time() * 1000)))
 
