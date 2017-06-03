@@ -8,7 +8,7 @@ from flask.helpers import make_response
 from werkzeug import redirect
 
 from Configs import POST, METHODS
-from app.utils.CommonUtils import send_req, xml2dict, set_login
+from app.utils.CommonUtils import send_req, xml2dict
 from app.views.BaseView import DEFAULT_TEMPLATE_FOLDER, inject_params
 from app.utils.mp.MsgDealer import MsgDealer
 
