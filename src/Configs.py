@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-    
+# -*- coding: utf-8 -*-
 METHODS = ['POST', 'GET']  # 统一方法请求类型
 POST = ['POST']
 GET = ['GET']
@@ -9,16 +9,16 @@ class dbOper:
     READ = 1
     WRITE = 2
     ALL = 3
-    
+
 dbConfigs = []
 
 DEFAULT_DB_NAME = 'default'
 DEFAULT_DB_RATE = 100
 DEFAULT_DB_HOST = 'localhost'
 DEFAULT_DB_PORT = 3306
-DEFAULT_DB_NAME = 'dbserver'
-DEFAULT_DB_USER = 'dbserver'
-DEFAULT_DB_PASSWD = 'bulin'
+DEFAULT_DB_NAME = 'plant_story'
+DEFAULT_DB_USER = 'root'
+DEFAULT_DB_PASSWD = 'root'
 DEFAULT_DB_CHARSET = 'utf8'
 DEFAULT_DB_MINCACHED = 1
 DEFAULT_DB_MAXCACHED = 20
@@ -41,7 +41,7 @@ def db_config_maker(name=DEFAULT_DB_NAME, rate=DEFAULT_DB_RATE,
         'charset' : charset
     }
 
-# configure db    
+# configure db
 dbConfigs.append(db_config_maker())
 
 ######### DBConfig end  ##########

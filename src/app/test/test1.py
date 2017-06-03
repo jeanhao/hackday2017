@@ -4,14 +4,17 @@
 import json
 import urllib
 import urllib2
+import cookielib
 
+cookie = cookielib.CookieJar()
+opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cookie))
 
 def send_req(url, data=None):
     url = "%s%s" % (base_url, url)
     if data:
         data = urllib.urlencode(data)
     req = urllib2.Request(url, data)
-    ret = urllib2.urlopen(req)
+    ret = opener.open(req)
     return ret.read()
 
 def send_json(info, userid=None):
@@ -32,7 +35,7 @@ if __name__ == '__main__':
 #     data = {'title':'test','detail':'detail12313','money':123,'end_date':'12312432'}
 #     print send_req('task/add', data)
     print send_req('user/message', {'phone_num':'15629071220', 'nickname':'zenghao'})
-#     print send_req('task/detail?task_id=7')
-#     print send_req('task/cancel',{'task_id':'7'})
-#     print send_req('task/accepted',{'task_id':'7'})
+    code = raw_input('input code')
+    print send_req('user/register', {'phone_num':'15629071220', 'nickname':'zenghao', 'verify_code':code, 'password':"123"})
+    print send_req('user/login', {'phone_num':'15629071220', 'password':"123"})
 
