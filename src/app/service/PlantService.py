@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from flask.globals import session
-from werkzeug.security import generate_password_hash, check_password_hash
 
 from Configs import dbOper
 from app.dbManager import DBTool  # @UnusedWildImport
@@ -8,7 +7,6 @@ from app.dbManager.DBModelFactory import DBModelFactory
 from app.service.BaseService import BaseService
 from app.utils.CommonUtils import *  # @UnusedWildImport
 from app.utils.Singleton import Singleton
-from app.utils.CommonUtils import get_now_date
 
 
 class PlantService(BaseService):

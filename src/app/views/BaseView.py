@@ -4,8 +4,7 @@ import os
 
 from flask.globals import session, request
 
-from app.utils import AesCrypt
-from app.utils.CommonUtils import pack, unpack
+from app.utils.CommonUtils import pack
 from app.utils.RetDefine import RetDefine
 
 
