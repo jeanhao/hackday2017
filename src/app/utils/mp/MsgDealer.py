@@ -14,7 +14,6 @@ from app.utils.Singleton import singleton
 from app.service.UserService import UserService
 from app.utils.CommonUtils import timestamp2str, filterMap
 from app.utils.RedisClient import RedisClient
-from configs import Config
 from app.utils.mp.MpManager import MpManager
 
 @singleton

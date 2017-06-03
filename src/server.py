@@ -8,7 +8,7 @@ from app.views.PlantView import plant_view
 
 def configure_blueprints(app):
     app.secret_key = 'qweasd'
-    blueprints = {main_view:'/api/', user_view:'/api/user/', plant_view:'/api/plant/'}
+    blueprints = {main_view:'/', user_view:'/api/user/', plant_view:'/api/plant/'}
     for key in blueprints:
         app.register_blueprint(key, url_prefix=blueprints[key])
 
