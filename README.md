@@ -93,6 +93,36 @@ POST /api/task/problem/answer
 }
 ```
 
+## 确认答案
+POST /api/task/answer/confirm
+
+### 请求参数
+|参数      |说明                   |
+|:-------|:--------------------|
+|has_weekend|是否包含周末|
+|week_size|疗程数量|
+|answers|答案json数组|
+> json数组里的每个元素可能包括：
+> 1. top_times
+2. bottom_times
+3. begin_time
+4. end_time
+5. problem_content
+
+### 响应示例
+```python
+{
+  "status": 0
+}
+```
+
+## 列表查看答案
+POST /api/task/answer/list
+
+### 请求参数
+
+### 响应示例
+
 ## 发送验证码
 POST /api/user/message
 

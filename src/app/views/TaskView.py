@@ -16,16 +16,23 @@ def list_tag():
 
 @task_view.route("problem/list", methods=GET)
 @is_loged
-@inject_params(['tags'])
-def list_problem(data):
-    tags = data.get('tags')
-    return TaskService().list_problem(tags)
+def list_problem():
+    return TaskService().list_problem(request.values.get('tags'))
 
-@task_view.route("problem/answer", methods=POST)
+@task_view.route("problem/answer", methods=GET)
 @is_loged
-@inject_params(['problems'])
-def answer_problem(data):
-    problems = data.get('problems')
+def answer_problem():
+    problems = request.values.get('problems').split(",")
     return TaskService().answer_problem(problems)
 
+@task_view.route("answer/comfirm", methods=POST)
+@is_loged
+@inject_params(['has_weekend', 'week_size', 'problems'])
+def comfirm_answer(data):
+    return TaskService().comfirm_answer(data)
+
+@task_view.route("answer/list", methods=GET)
+@is_loged
+def list_answer():
+    return TaskService().list_answer()
 
