@@ -3,11 +3,11 @@
 
 from flask import Flask
 from app.views.MainView import main_view
-
+from app.views.UserView import user_view
 
 def configure_blueprints(app):
     app.secret_key = 'qweasd'
-    blueprints = {main_view:'/'}
+    blueprints = {main_view:'/', user_view:'/user/'}
     for key in blueprints:
         app.register_blueprint(key, url_prefix=blueprints[key])
 

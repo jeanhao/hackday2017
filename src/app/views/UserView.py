@@ -13,12 +13,12 @@ user_view = Blueprint('user', __name__, url_prefix="/" , template_folder=DEFAULT
 
 
 
-@user_view.route("message")
+@user_view.route("message", methods=POST)
 @inject_params(['phone_num', 'nickname'])
 def send_message(data):
     verify_code = gen_ramdon_num()
     session['verify_code'] = verify_code
-    res = PhoneMessager.send_message(data['phone_num'], data['nick_name'], verify_code)
+    res = PhoneMessager.send_message(data['phone_num'], data['nickname'], verify_code)
     if res:
         return pack()
     else:
