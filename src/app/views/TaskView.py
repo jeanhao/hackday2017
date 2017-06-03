@@ -23,8 +23,9 @@ def list_problem(data):
 
 @task_view.route("problem/answer", methods=POST)
 @is_loged
-def answer_problem():
-    problems = request.get_json()
+@inject_params(['problems'])
+def answer_problem(data):
+    problems = data.get('problems')
     return TaskService().answer_problem(problems)
 
 
