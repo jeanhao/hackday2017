@@ -17,6 +17,55 @@ USERNAME_PASSWORD_NOT_MATCH = 103
 USER_NOT_LOGIN = 104
 ```
 
+
+## 获取标签
+GET /api/task/tag/list
+
+### 请求参数
+
+### 响应示例
+```python
+{
+  "status": 0,
+  "data": [
+    {
+      "tag_name": "拖延症",
+      "id": 24
+    },
+    {
+      "tag_name": "邋遢",
+      "id": 25
+    },
+    ……
+  ]
+}
+```
+
+## 获取问题
+GET /api/task/problem/list
+
+### 请求参数
+`{tags:[数组]} `
+
+### 响应示例
+```python
+{
+  "status": 0,
+  "data": [
+    {
+      "tag_name": "拖延症",
+      "id": 24
+    },
+    {
+      "tag_name": "邋遢",
+      "id": 25
+    },
+    ……
+  ]
+}
+```
+
+
 ## 发送验证码
 POST /api/user/message
 
