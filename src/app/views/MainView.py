@@ -130,3 +130,7 @@ def weather():
         url = "http://restapi.amap.com/v3/weather/weatherInfo?key=%s&city=%s" % (gaode_key, pos['adcode'])
         return send_req(url)
 
+@main_view.route('clear_session')
+def clear_session():
+    session.clear()
+    return 'ok'
