@@ -12,6 +12,7 @@ from app.utils.CommonUtils import send_req, xml2dict
 from app.views.BaseView import DEFAULT_TEMPLATE_FOLDER, inject_params
 from app.utils.mp.MsgDealer import MsgDealer
 from app.service.UserService import UserService
+from flask.templating import render_template
 
 
 main_view = Blueprint('main_view', __name__, url_prefix="/" , template_folder=DEFAULT_TEMPLATE_FOLDER)
@@ -89,8 +90,7 @@ def route(site, _id=None):
         return "访问地址出错，请检查"
     # 检查用户状态
     if 'user' in session:
-        session['user']
-
+        return render_template("%s.html" % site)
     else:
         url = Configs.AUTH_BASE_URL + site
         if id:
