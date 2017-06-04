@@ -19,7 +19,7 @@ DEFAULT_DB_PORT = 3306
 DEFAULT_DB_NAME = 'hackday_plant'
 DEFAULT_DB_USER = 'root'
 DEFAULT_DB_PASSWD = 'Hustonline87542701'
-DEFAULT_DB_CHARSET = 'utf8'
+DEFAULT_DB_CHARSET = 'utf8mb4'
 DEFAULT_DB_MINCACHED = 1
 DEFAULT_DB_MAXCACHED = 20
 
@@ -49,15 +49,13 @@ dbConfigs.append(db_config_maker())
 
 # redis config
 REDIS_PORT1 = 6379
-#         DEFAULT_HOST = 'localhost'
-DEFAULT_HOST = 'redis'
+DEFAULT_HOST = 'localhost'
+# DEFAULT_HOST = 'redis'
 #         DEFAULT_HOST = 'r-m5ef8971af1a9f54.redis.rds.aliyuncs.com'
 #         REDIS_PASSWORD = "Qwe12345"
 
 
-redis_configs = {
-'default':{'host':DEFAULT_HOST, 'port' : REDIS_PORT1},
-}
+redis_configs = [{'host':DEFAULT_HOST, 'port' : REDIS_PORT1}]
 MP_TOKEN = 'mp_token'
 MP_TOKEN_LOCK = 'mp_token_lock'
 

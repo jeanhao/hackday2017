@@ -9,14 +9,13 @@ Created on 2017年4月29日
 from app.utils.Singleton import singleton
 from app.utils.RedisClient import RedisClient
 from time import sleep
-from app.utils.CommonUtils import send_req, filterMap, send_json
+from app.utils.CommonUtils import send_req, filterMap, send_json, get_now_date
 import Configs
 import json
 from app.service.UserService import UserService
-import time
 
 @singleton
-class MpManager(object):
+class MpTimer(object):
 
     def __init__(self):
         self.redisClient = RedisClient()
@@ -38,7 +37,7 @@ class MpManager(object):
                     res = send_req(Configs.ACCESS_TOKEN_URL)
                     token_data = json.loads(res)
                     token = token_data['access_token']
-                    self.redisClient.set(Configs.MP_TOKEN, token, ex=token_data['expires_in'] - 100)
+                    self.redisClient.caller("set", Configs.MP_TOKEN, token, ex=token_data['expires_in'] - 100)
                 finally:
                     self.redisClient.unlock(Configs.MP_TOKEN_LOCK)
         return token
@@ -97,3 +96,9 @@ class MpManager(object):
         token = token if token else self.getToken()
         res = send_json(Configs.TEMPLATE_SEND_URL % token , data)
         return res
+
+if __name__ == '__main__':
+    users = MpTimer().getUserList(detail=True)
+    for open_id, info in users.items():
+        data = {"open_id":open_id, "create_date":get_now_date(), "nickname":info['nickname'], 'gender':info['sex']}
+        UserService().add_user(data)

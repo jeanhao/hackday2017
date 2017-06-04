@@ -46,3 +46,14 @@ class UserService(BaseService):
         session['user'] = ret
         return pack()
 
+
+    @connectionWrapper(dbOper.WRITE)
+    def add_user(self, model, user):
+        sql = DBTool.insert(self.table, user)
+        model.execute(sql)
+
+    @connectionWrapper(dbOper.WRITE)
+    def dropUser(self, model, open_id):
+        sql = DBTool.update(self.table, {'subscribe':0}, {'open_id':open_id})
+        model.execute(sql)
+
