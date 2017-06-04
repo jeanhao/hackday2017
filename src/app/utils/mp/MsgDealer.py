@@ -51,7 +51,7 @@ class MsgDealer(object):
                 content = CONTENT_KEYWORDS[keyword]
                 break
         if content == '明日任务':
-            
+            pass
         return self.respText(data['FromUserName'], data['ToUserName'], content)
 
     def event(self, data):
