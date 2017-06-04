@@ -17,8 +17,8 @@ from app.utils.mp.MpManager import MpManager
 from app.utils.CommonUtils import filterMap, get_now_date
 
 CONTENT_KEYWORDS = {
-"计划开始":
-"""亲爱的石楠，你的“告别拖延”养成计划以生成，
+u"计划开始":
+u"""亲爱的石楠，你的“告别拖延”养成计划以生成，
 从今天开始，未来三周内，
 每天我都会提醒你去完成当日任务，
 并不定期用禁令来拷问你的良心，
@@ -29,8 +29,8 @@ CONTENT_KEYWORDS = {
 
 回复【任务卡】领取任务。""",
 
-"任务卡":
-"""
+u"任务卡":
+u"""
 “告别拖延”养成计划第一天
 
 今日任务：
