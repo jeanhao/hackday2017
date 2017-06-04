@@ -9,8 +9,8 @@
       key="item.id",
       @click="handleProblemClick(item)"
       :class="{active: chooseProblems.includes(item.id)}") {{item.content}}
-  div.submit-wrapper
-    div.submit-button(@click="setProblems") 点击即可翻身
+  .submit-wrapper
+    .submit-button(@click="setProblems") 点击即可翻身
 </template>
 
 <script>

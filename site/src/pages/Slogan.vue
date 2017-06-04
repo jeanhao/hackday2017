@@ -32,6 +32,10 @@ export default {
 #index-wrapper {
   font-size: .16rem;
   text-align: left;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
   height: 100%;
 }
 .question-wrapper {

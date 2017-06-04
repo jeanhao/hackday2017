@@ -58,7 +58,6 @@ export default {
       }
       const tags = chooseTags.join()
       this.$get(API.getProblems, { tags }).then((res) => {
-        console.log(1)
         this.setProblems(res)
         this.$router.push({ path: 'question' })
       })

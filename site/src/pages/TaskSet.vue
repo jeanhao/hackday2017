@@ -54,9 +54,22 @@ export default {
   data() {
     return {
       level: 1,
+      dialog: null,
+      dayDialog: null,
+      curClickDay: null,
+      curClickWeek: null,
+      decadeDialog: null,
+      decade: 3,
+      weekNum: null,
+      beginTime: null,
+      endTime: null,
+      has_weekend: true,
     }
   },
   props: {
+    updateDay: Function,
+    updateWeek: Function,
+    start: Function,
     tasks: Array,
   },
   computed: {
@@ -67,6 +80,43 @@ export default {
     curWeekTasks() {
       if (!this.tasks) return []
       return this.tasks.filter(item => item.choice === this.level && item.ans_type === 1)
+    },
+  },
+  methods: {
+    closeWeek() {
+      this.dialog = false
+    },
+    showWeekDialog(task) {
+      this.dialog = true
+      this.curClickWeek = task
+    },
+    showDayDialog(task) {
+      this.dayDialog = true
+      this.curClickDay = task
+    },
+    closeDay() {
+      this.dayDialog = false
+    },
+    updateWeekNum() {
+      if (!this.weekNum) return
+      this.updateWeek(this.curClickWeek, this.weekNum)
+      this.dialog = false
+      this.weekNum = null
+    },
+    updateDayNum() {
+      if (!this.beginTime || !this.endTime) return
+      this.updateDay(this.curClickDay, this.beginTime, this.endTime)
+      this.dayDialog = false
+    },
+    startMyPlan() {
+      this.start(this.decade, this.has_weekend, this.level)
+    },
+    closeDecade() {
+      this.decadeDialog = false
+      this.decade = 3
+    },
+    sureDecade() {
+      this.decadeDialog = false
     },
   },
 }

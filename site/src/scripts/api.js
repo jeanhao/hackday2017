@@ -8,4 +8,5 @@ export default {
   getTags: `${BASE_API}api/task/tag/list`,
   getProblems: `${BASE_API}api/task/problem/list`,
   getAnswers: `${BASE_API}api/task/problem/answer`,
+  startPlan: `${BASE_API}api/task/answer/confirm`,
 }
