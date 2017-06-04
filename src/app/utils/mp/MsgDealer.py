@@ -14,7 +14,7 @@ from app.utils.Singleton import singleton
 from app.service.UserService import UserService
 from app.utils.RedisClient import RedisClient
 from app.utils.mp.MpManager import MpManager
-from app.utils.CommonUtils import filterMap
+from app.utils.CommonUtils import filterMap, get_now_date
 
 @singleton
 class MsgDealer(object):
@@ -55,7 +55,8 @@ class MsgDealer(object):
         if event == "subscribe":  # 用户关注微信号
             GFLogger.debug("subscribe event happend")
             userinfo = self.mpManager.getDetailUser(data['FromUserName'])
-            self.userService.addUser(filterMap(userinfo, ['openid', 'nickname']))
+            user = {"open_id":userinfo['open_id'], "create_date":get_now_date(), "nickname":userinfo['nickname'], 'gender':userinfo['sex']}
+            self.userService.addUser(user)
             return self.respText(data['FromUserName'], data['ToUserName'], "欢迎关注公众号")
         elif event == "unsubscribe":  # 用户取消关注微信号
             GFLogger.debug("unsubscribe event happend")

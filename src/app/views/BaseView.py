@@ -17,6 +17,8 @@ else:
 def is_loged(func):
     @wraps(func)
     def lazy_func(*args, **kwds):
+        user = {"open_id": 'o-UJCxAoz4qdPzxJL2N-us54JXc0', 'nickname':u'小三', 'images':'test'}
+        session['user'] = user
         if 'user' in session:
             return func(*args, **kwds)
         else:
@@ -34,7 +36,7 @@ def inject_params(params, can_empty=False):
             for arg in params:
                 if type(arg) == str:
                     data[arg] = req_data.get(arg, None)
-                    if not can_empty and not data[arg]:
+                    if not can_empty and data[arg] == None:
                         return pack(RetDefine.LACK_ARGS)
                 elif type(arg) == tuple:
                     default_val = hasattr(arg[1], '__call__') and arg[1]() or arg[1]

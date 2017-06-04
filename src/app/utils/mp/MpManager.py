@@ -97,34 +97,3 @@ class MpManager(object):
         token = token if token else self.getToken()
         res = send_json(Configs.TEMPLATE_SEND_URL % token , data)
         return res
-if __name__ == '__main__':
-    touser = "o-UJCxIpgmE8Mq_KaYaJXdoOsWWw"
-    template_id = Configs.TEMPLATE_ID_1
-    url = "www.baidu.com"
-    data = {
-        "first": {
-           "value":"有人接单啦",
-           "color":"#173177"
-       },
-       "keyword1":{
-           "value":"卖巧克力",
-           "color":"#173177"
-       },
-       "keyword2": {
-           "value":"111",
-           "color":"#173177"
-       },
-       "keyword3": {
-           "value":"9999",
-           "color":"#173177"
-       },
-        "keyword4": {
-           "value":"2014年9月22日",
-           "color":"#173177"
-       },
-       "remark":{
-           "value":"欢迎再次购买！",
-           "color":"#173177"
-       }
-    }
-    MpManager().sendTemplate(touser, template_id, data, url)
