@@ -39,8 +39,3 @@ class MpTimer(Thread):
                 content = "你的任务【%s】开始时间到啦~" % task.get('answer_content')
                 MpManager().sendMsg(open_id, 'text', content)
 
-# if __name__ == '__main__':
-#     users = MpTimer().getUserList(detail=True)
-#     for open_id, info in users.items():
-#         data = {"open_id":open_id, "create_date":get_now_date(), "nickname":info['nickname'], 'gender':info['sex']}
-#         UserService().add_user(data)

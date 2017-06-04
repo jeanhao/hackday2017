@@ -97,3 +97,6 @@ class MpManager(object):
         token = token if token else self.getToken()
         res = send_json(Configs.TEMPLATE_SEND_URL % token , data)
         return res
+if __name__ == '__main__':
+    users = MpManager().getUserList(detail=True)
+    print users

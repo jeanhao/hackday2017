@@ -17,8 +17,8 @@ else:
 def is_loged(func):
     @wraps(func)
     def lazy_func(*args, **kwds):
-#         user = {"open_id": 'o-UJCxAoz4qdPzxJL2N-us54JXc0', 'nickname':u'小三', 'images':'test'}
-#         session['user'] = user
+        user = {"open_id": 'o-UJCxAoz4qdPzxJL2N-us54JXc0', 'nickname':u'小三', 'images':'test'}
+        session['user'] = user
         if 'user' in session:
             return func(*args, **kwds)
         else:
