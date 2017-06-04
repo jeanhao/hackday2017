@@ -93,8 +93,8 @@ def route(site, _id=None):
         return render_template("%s.html" % site)
     else:
         url = Configs.AUTH_BASE_URL + site
-        if id:
-            url = "%s/%s" % (url, id)
+        if _id:
+            url = "%s/%s" % (url, _id)
         return redirect(url)
 
 @main_view.route("user_info")
