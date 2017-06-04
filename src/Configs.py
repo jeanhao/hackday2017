@@ -60,7 +60,7 @@ MP_TOKEN = 'mp_token'
 MP_TOKEN_LOCK = 'mp_token_lock'
 
 APPID = "wxd0b09445bfc46d53"
-AUTH_BASE_URL = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxd0b09445bfc46d53&redirect_uri=http%3A%2F%2Fhackday.bingyan.net%2Flogin&response_type=code&scope=snsapi_userinfo&state=public/"
+AUTH_BASE_URL = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxd0b09445bfc46d53&redirect_uri=http%3A%2F%2Fbbmhackday.bingyan.net%2Flogin&response_type=code&scope=snsapi_userinfo&state=public/"
 # hustbbm
 APPSECRET = "212c139737fbe2602f0cbe766b96b161"
 ACCESS_TOKEN_URL = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=" + APPID + "&secret=" + APPSECRET
