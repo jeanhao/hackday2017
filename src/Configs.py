@@ -59,7 +59,7 @@ redis_configs = [{'host':DEFAULT_HOST, 'port' : REDIS_PORT1}]
 MP_TOKEN = 'mp_token'
 MP_TOKEN_LOCK = 'mp_token_lock'
 
-AUTH_BASE_URL = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx690cda5c2ea251b2&redirect_uri=http%3A%2F%2Fbbm.hustonline.net%2Flogin&response_type=code&scope=snsapi_userinfo&state=public/"
+AUTH_BASE_URL = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx690cda5c2ea251b2&redirect_uri=http%3A%2F%2Fhackday.bingyan.net%2Flogin&response_type=code&scope=snsapi_userinfo&state=public/"
 # hustbbm
 APPID = "wxd0b09445bfc46d53"
 APPSECRET = "212c139737fbe2602f0cbe766b96b161"
