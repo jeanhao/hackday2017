@@ -9,7 +9,7 @@ from werkzeug import redirect
 import Configs
 from Configs import POST, METHODS
 from app.utils.CommonUtils import send_req, xml2dict
-from app.views.BaseView import DEFAULT_TEMPLATE_FOLDER, inject_params
+from app.views.BaseView import DEFAULT_TEMPLATE_FOLDER, inject_params, is_loged
 from app.utils.mp.MsgDealer import MsgDealer
 from app.service.UserService import UserService
 from flask.templating import render_template
@@ -98,6 +98,7 @@ def route(site, _id=None):
         return redirect(url)
 
 @main_view.route("user_info")
+@is_loged
 def user_info():
     return json.dumps(session['user'])
 
