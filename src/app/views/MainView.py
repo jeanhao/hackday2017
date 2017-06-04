@@ -97,6 +97,10 @@ def route(site, _id=None):
             url = "%s/%s" % (url, id)
         return redirect(url)
 
+@main_view.route("user_info")
+def user_info():
+    return json.dumps(session['user'])
+
 @main_view.route("get_ip")
 def get_ip():
     return request.remote_addr

@@ -11,8 +11,6 @@ from app.utils.RetDefine import RetDefine
 
 user_view = Blueprint('user', __name__, url_prefix="/" , template_folder=DEFAULT_TEMPLATE_FOLDER)
 
-
-
 @user_view.route("message", methods=POST)
 @inject_params(['phone_num'])
 def send_message(data):
