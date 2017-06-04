@@ -17,8 +17,8 @@ else:
 def is_loged(func):
     @wraps(func)
     def lazy_func(*args, **kwds):
-        user = {"open_id": 'o-UJCxAoz4qdPzxJL2N-us54JXc0', 'nickname':u'小三', 'images':'test'}
-        session['user'] = user
+#         user = {"open_id": 'o-UJCxAoz4qdPzxJL2N-us54JXc0', 'nickname':u'小三', 'images':'test'}
+#         session['user'] = user
         if 'user' in session:
             return func(*args, **kwds)
         else:
@@ -31,7 +31,6 @@ def inject_params(params, can_empty=False):
         @wraps(func)
         def lazy_func(*args, **kargs):
             req_data = request.get_json() or {}
-            print req_data
             data = {}
             for arg in params:
                 if type(arg) == str:

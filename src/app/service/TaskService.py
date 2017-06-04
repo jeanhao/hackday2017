@@ -7,9 +7,19 @@ from app.dbManager.DBModelFactory import DBModelFactory
 from app.service.BaseService import BaseService
 from app.utils.CommonUtils import *  # @UnusedWildImport
 from app.utils.Singleton import Singleton
+from app.utils.mp.MpManager import MpManager
 
 TIME_FORMAT_MINI = '%Y-%m-%d %H:%M'
 
+NOTICE_CONTENT = """亲爱的%s，你的“告别拖延”养成计划已生成！
+从今天开始，未来三周内。
+每天我都会提醒你去完成当日任务。（每周有一次修改任务机会）
+并不定期用禁令来拷问你的良心，
+虽然不一定会痛。
+
+总之，任务卡没有完成或者违反禁令，
+都会得到令人失落的反馈，
+所以，请一定要加油哦。"""
 class TaskService(BaseService):
 
     __metaclass__ = Singleton
@@ -70,6 +80,7 @@ class TaskService(BaseService):
             sql = DBTool.insert(self.up_table, answer)
             print sql
             model.execute(sql)
+        MpManager().sendMsg(open_id, 'text', NOTICE_CONTENT)
         return pack()
 
     @connectionWrapper(dbOper.READ)
