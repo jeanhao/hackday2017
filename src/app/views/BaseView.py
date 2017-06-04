@@ -9,9 +9,9 @@ from app.utils.RetDefine import RetDefine
 
 
 if os.name == 'nt':
-    DEFAULT_TEMPLATE_FOLDER = 'E:/eclipse-multi/DbAdmin/static'
+    DEFAULT_TEMPLATE_FOLDER = 'E:/eclipse-multi/HackDay/public'
 else:
-    DEFAULT_TEMPLATE_FOLDER = '/root/DbAdmin/static'
+    DEFAULT_TEMPLATE_FOLDER = '/home/hustonline/zenghao/hackday_plant/public'
 
 # 检查登录状态
 def is_loged(func):
