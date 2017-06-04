@@ -38,7 +38,7 @@ class MpManager(object):
                     res = send_req(Configs.ACCESS_TOKEN_URL)
                     token_data = json.loads(res)
                     token = token_data['access_token']
-                    self.redisClient.set(Configs.MP_TOKEN, token, ex=token_data['expires_in'] - 100)
+                    self.redisClient.caller("set", Configs.MP_TOKEN, token, ex=token_data['expires_in'] - 100)
                 finally:
                     self.redisClient.unlock(Configs.MP_TOKEN_LOCK)
         return token

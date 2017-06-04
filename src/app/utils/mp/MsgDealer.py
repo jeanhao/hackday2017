@@ -16,6 +16,51 @@ from app.utils.RedisClient import RedisClient
 from app.utils.mp.MpManager import MpManager
 from app.utils.CommonUtils import filterMap, get_now_date
 
+CONTENT_KEYWORDS = {
+"计划开始":
+"""亲爱的石楠，你的“告别拖延”养成计划以生成，
+从今天开始，未来三周内，
+每天我都会提醒你去完成当日任务，
+并不定期用禁令来拷问你的良心，
+虽然不一定会痛。
+总之，任务卡没有完成或者违反禁令，
+都会得到令人失落的反馈，
+所以，请一定要加油哦。
+
+回复【任务卡】领取任务。""",
+
+"任务卡":
+"""
+“告别拖延”养成计划第一天
+
+今日任务：
+时间性任务1      验证码【060401】
+时间性任务1      验证码【060402】
+。。。。。。
+
+本周禁令
+吃油炸食品    不超过   2次
+喝碳酸饮料    不超过   2次
+给父母电话    不低于   1次
+。。。
+任务完成后，请务必记得回复验证码完成打卡，
+否则我会自动判断为“你在偷懒”哟。
+
+060401
+时间性任务1       打卡完成！
+今日已打卡：
+时间性任务1
+
+今日未打卡：
+时间性任务2      验证码【060402】
+
+
+如果你觉得动力不足，
+可以回复【鸡汤】
+我有惊喜给你！
+"""
+
+}
 @singleton
 class MsgDealer(object):
 
@@ -44,10 +89,10 @@ class MsgDealer(object):
 
     def dealContent(self, data):
         content = data['Content']
-#         for keyword in Config.CONTENT_KEYWORDS:
-#             if keyword == content:
-#                 content = Config.CONTENT_KEYWORDS[keyword]
-#                 break
+        for keyword in CONTENT_KEYWORDS:
+            if keyword == content:
+                content = CONTENT_KEYWORDS[keyword]
+                break
         return self.respText(data['FromUserName'], data['ToUserName'], content)
 
     def event(self, data):
