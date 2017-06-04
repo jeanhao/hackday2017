@@ -8,6 +8,8 @@ from app.service.BaseService import BaseService
 from app.utils.CommonUtils import *  # @UnusedWildImport
 from app.utils.Singleton import Singleton
 
+TIME_FORMAT_MINI = '%Y-%m-%d %H:%M'
+
 class TaskService(BaseService):
 
     __metaclass__ = Singleton
@@ -58,13 +60,20 @@ class TaskService(BaseService):
         sql = DBTool.update(self.user_table, data, where, ['has_weekend', 'week_size'])
         model.execute(sql)
         # 插入新的任务数据
-        for problem in data['problems']:
-            sql = DBTool.insert(self.up_table, problem)
+        for answer in data['answers']:
+            answer['open_id'] = open_id
+            if 'id' in answer:
+                answer.pop('id')
+#                 sql = DBTool.select(self.answer_table, ['content'], {'id':answer['id']})
+#                 res = model.GetOne(sql)
+#                 answer['answer_content'] = res['content']
+            sql = DBTool.insert(self.up_table, answer)
+            print sql
             model.execute(sql)
         return pack()
 
     @connectionWrapper(dbOper.READ)
-    def list_answer(self, model, data):
+    def list_answer(self, model):
         open_id = session['user']['open_id']
         where = {"open_id":open_id}
         sql = DBTool.select(self.user_table, ['has_weekend', 'week_size'] , where)
@@ -75,6 +84,23 @@ class TaskService(BaseService):
         problems = model.GetList(sql)
         data['problems'] = problems
         return pack(data=data)
+
+    @connectionWrapper(dbOper.READ)
+    def get_tasks(self, model):
+        sql = DBTool.select(self.up_table, {'ans_type':0})
+        tasks = model.GetList(sql)
+        now = time.time()
+        ret_task = {}
+        for task in tasks:
+            date_str = "%s %s" % get_now_time(), task['begin_time']
+            t = time.mktime(time.strptime(date_str, TIME_FORMAT_MINI))
+            if t < now:  # 跳过已过去的
+                continue
+            if t not in ret_task:
+                ret_task[t] = [task]
+            else:
+                ret_task[t].append(task)
+        return ret_task
 
     @connectionWrapper(dbOper.WRITE)
     def add_tag(self, model):
@@ -99,7 +125,7 @@ class TaskService(BaseService):
             for j in xrange(3):
                 data = {"content":'answer%d' % i, 'problem_id':i, 'choice':j}
                 sql = DBTool.insert(self.answer_table, data)
-                res = model.execute(sql)
+                model.execute(sql)
 
     @connectionWrapper(dbOper.WRITE)
     def add_test(self, model):
@@ -107,7 +133,7 @@ class TaskService(BaseService):
             for j in xrange(47, 57):
                 data = { 'problem_id':i, 'tag_id':j}
                 sql = DBTool.insert(self.tp_table, data)
-                res = model.execute(sql)
+                model.execute(sql)
 
 if __name__ == '__main__':
     TaskService().add_test()

@@ -25,9 +25,9 @@ def answer_problem():
     problems = request.values.get('problems').split(",")
     return TaskService().answer_problem(problems)
 
-@task_view.route("answer/comfirm", methods=POST)
+@task_view.route("answer/confirm", methods=POST)
 @is_loged
-@inject_params(['has_weekend', 'week_size', 'problems'])
+@inject_params(['has_weekend', 'week_size', 'answers'])
 def comfirm_answer(data):
     return TaskService().comfirm_answer(data)
 

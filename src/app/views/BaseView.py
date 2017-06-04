@@ -36,7 +36,7 @@ def inject_params(params, can_empty=False):
             for arg in params:
                 if type(arg) == str:
                     data[arg] = req_data.get(arg, None)
-                    if not can_empty and not data[arg]:
+                    if not can_empty and data[arg] == None:
                         return pack(RetDefine.LACK_ARGS)
                 elif type(arg) == tuple:
                     default_val = hasattr(arg[1], '__call__') and arg[1]() or arg[1]

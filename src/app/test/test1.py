@@ -44,9 +44,17 @@ if __name__ == '__main__':
 #     print json_req('user/message', {'phone_num':phone_num})
 #     code = raw_input('input code')
 #     print send_req('user/register', {'phone_num':phone_num, 'nickname':'zenghao', 'verify_code':code, 'password':"123"})
-    print json_req('user/login', {'phone_num':'15629071220', 'password':"qwe123"})
-    print json_req('plant/list')
-    print json_req('plant/add', {"pt_type":'type1', "age":10, "nickname":"tree"})
-#     print json_req('plant/del', {"id":1})
-    print json_req('pl nt/detail/2')
+#     print json_req('user/login', {'phone_num':'15629071220', 'password':"qwe123"})
+#     print json_req('plant/list')
+#     print json_req('plant/add', {"pt_type":'type1', "age":10, "nickname":"tree"})
+#     print json_req('task/answer/confirm', {u'week_size': 3, u'has_weekend': 1, u'answers': [{'ans_type':1,
+# "begin_time":"",
+# "bottom_times":0,
+# "content":"制定一个未来2天的计划，编辑自定义任务5个",
+# "end_time":"",
+# "id":312,
+# "problem_id":2,
+# "top_times":5}]})
+    print json_req('task/answer/list')
+#     print json_req('pl nt/detail/2')
 

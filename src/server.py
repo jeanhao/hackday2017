@@ -6,6 +6,9 @@ from app.views.MainView import main_view
 from app.views.UserView import user_view
 from app.views.PlantView import plant_view
 from app.views.TaskView import task_view
+from app.utils.mp.MpTimer import MpTimer
+import time, threading
+from app.utils.Timer import LoopingCall
 
 def configure_blueprints(app):
     app.secret_key = 'qweasd'
@@ -18,6 +21,16 @@ def create_app():
     configure_blueprints(app)
     return app
 
+def reload_timer():
+    MpTimer().start()
+
+def init_task_timer():
+    cur_time = time.time()
+    one_day = 86400
+    time_flag = one_day - cur_time % one_day
+    LoopingCall(time_flag, one_day, reload_timer).start()
+
+init_task_timer()
 app = create_app()
 
 if __name__ == "__main__":

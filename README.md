@@ -108,11 +108,33 @@ POST /api/task/answer/confirm
 3. begin_time
 4. end_time
 5. problem_content
+6. ans_type
+
 
 ### 响应示例
 ```python
 {
-  "status": 0
+  "status": 0,
+  "data": {
+    "week_size": 31,
+    "problems": [
+      {
+        "ans_type": 1,
+        "open_id": "o-UJCxAoz4qdPzxJL2N-us54JXc0",
+        "bottom_times": 0,
+        "begin_time": "",
+        "comfirm_time": "",
+        "problem_id": 1,
+        "content": "\u5b8c\u6210\u4e00\u987948\u5c0f\u65f6\u5185\u8981\u4e0a\u4ea4\u7684\u4efb\u52a1",
+        "score": 0,
+        "end_time": "",
+        "top_times": 1,
+        "id": 30
+      },
+	……
+	],
+    "has_weekend": 0
+  }
 }
 ```
 
